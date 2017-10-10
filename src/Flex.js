@@ -18,7 +18,7 @@ class Flex extends Events {
             var count = arguments.length;
             for(var i = 0; i < count; i++)
             {
-                self = self.replace('{' + i + '}', arguments[i]);   
+                while(self.indexOf('{'+ i + '}') != -1) self = self.replace('{' + i + '}', arguments[i]);   
             }
             return self;
         }        

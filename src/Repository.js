@@ -36,6 +36,28 @@ class Repository extends Events {
         });
     }
 
+    Create(model) {
+        const self = this;
+        var columnNum = self.Columns.length;
+        var createQuery = "INSERT INTO {0} (".format(self.Model.Name);
+        for(var i = 0; i < self.Columns.length; i++)
+        {
+            if(i == self.Columns.length - 1) createQuery += self.Columns[i] + ") VALUES (";
+            else createQuery += self.Columns[i] + ","   
+        }
+
+        for(var i = 0; i < self.Columns.length; i++)
+        {
+            if(i == self.Columns.length - 1) createQuery += "'" + model[self.Columns[i]] + "');"; 
+            else createQuery += "'" + model[self.Columns[i]] + "',";    
+        }
+        
+        self.Conn.query(createQuery, function(err, res, fields){
+
+        });
+
+    }
+
     GetById(id) {
         const self = this;
         for(var i = 0; i < self.Data.length; i++)
@@ -48,15 +70,7 @@ class Repository extends Events {
 
     UpdateById(id, model) {
         const self = this;
-        var item = null;
-        for(var i = 0; i < self.Data.length; i++)
-        {
-            if(self.Data[i][self.PrimaryKey] == id)
-            {
-                item = self.Data[i]; 
-                break;
-            }
-        }
+        var item = self.GetById(id);
 
         if(item != null)
         {
@@ -79,7 +93,19 @@ class Repository extends Events {
     }
 
     DeleteById(id) {
+        const self = this;
 
+        var item = self.GetById(id);
+
+        if(item != null)
+        {
+            var index = self.Data.indexOf(item);
+            var deleteQuery = "DELETE FROM {0} WHERE {1} = {2}".format(self.Model.Name, self.PrimaryKey, id);
+            self.Conn.query(deleteQuery, function(err, res, fields){
+                if(err) console.log(err);
+            });
+            self.Data.splice(index, 1);
+        }
     }
 }
 

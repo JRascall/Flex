@@ -8,7 +8,14 @@ var flex = new Flex({
 },  __dirname + "/models");
 
 flex.on('ready', function(){
-    var user = flex.users.GetById(1);
-    user.email = "j.mascall@hotmail.com";
-    flex.users.UpdateById(1, user);
+    //var user = flex.users.GetById(1);
+    //user.email = "j.test@hotmail.com";
+    //flex.users.UpdateById(1, user);
+    //flex.users.DeleteById(1);
+
+    var newUser = {
+        "email" : "jamiesEmaildowehavenulls",
+        "password" : "yes",
+    }
+    flex.users.Create(newUser);
 });
