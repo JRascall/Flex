@@ -53,7 +53,7 @@ class Repository extends Events {
         }
 
         self.Conn.query(createQuery, function(err, res, fields){
-            if(err != null) self.Data.push(model);
+            if(err == null) self.Data.push(model);
         });
 
     }
