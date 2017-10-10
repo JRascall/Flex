@@ -48,8 +48,34 @@ class Repository extends Events {
 
     UpdateById(id, model) {
         const self = this;
-        
-        
+        var item = null;
+        for(var i = 0; i < self.Data.length; i++)
+        {
+            if(self.Data[i][self.PrimaryKey] == id)
+            {
+                item = self.Data[i]; 
+                break;
+            }
+        }
+
+        if(item != null)
+        {
+            item = model;   
+            var columnNum = self.Columns.length;
+            var updateQuery = "UPDATE {0} SET ".format(self.Model.Name);
+            for(var i = 0; i < columnNum; i++)
+            {
+                if(i == columnNum - 1) updateQuery += "{0} = '{1}' ".format(self.Columns[i], item[self.Columns[i]]);
+                else updateQuery += "{0} = '{1}', ".format(self.Columns[i], item[self.Columns[i]]);
+            } 
+            updateQuery += "WHERE {0} = {1}".format(self.PrimaryKey, item[self.PrimaryKey]);
+            self.Conn.query(updateQuery, function(err, res, fields){
+                if(err) console.log(err);
+            });
+        }
+
+        return item;
+
     }
 
     DeleteById(id) {

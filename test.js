@@ -9,5 +9,6 @@ var flex = new Flex({
 
 flex.on('ready', function(){
     var user = flex.users.GetById(1);
-    console.log(user);
+    user.email = "j.mascall@hotmail.com";
+    flex.users.UpdateById(1, user);
 });
