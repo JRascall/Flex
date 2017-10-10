@@ -3,8 +3,7 @@
     "Columns": {
         "Id" : {
             "Type": "int",
-            "Primary": true,
-            "IsDBGenerated": "true"
+            "Primary": true
         },
         "name" : {
             "Type": "varchar",
