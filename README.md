@@ -51,3 +51,11 @@ var user = flex.users.GetById(1);
 ```
 the flex instance will contain the collections of your tables so if you had a model with the name "games" which models your "games" table it will be in flex.games so you can do flex.games.GetById(2) to get a record with the Id of 2.
 
+### WHERE Query data - Example query all by email
+```javascript
+var users = flex.users.Where(function(x){
+    if(x.email == "jamie@hotmail.com") return true;
+    else return false;
+}); 
+```
+You can pass lambda expressions to the where to query the data even more. So in this example its going to bring back any data that has the email of jamie@hotmail.com
