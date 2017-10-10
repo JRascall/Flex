@@ -1,7 +1,7 @@
 # Flex
 ## An attempt at creating something similar to SQL-To-Linq in .Net
 
-Trying to make it easier to create a DB connection and start querying data. Its really basic at the moment so be warned.
+Trying to make it easier to create a DB connection and start querying data. Its really basic at the moment so be warned also no escaping on the values.
 
 ### Using flex
 ```javascript
