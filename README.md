@@ -1,7 +1,7 @@
 # Flex
 ## An attempt at creating something similar to SQL-To-Linq in .Net
 
-Trying to make it easier to create a DB connection and start querying data.
+Trying to make it easier to create a DB connection and start querying data. Its really basic at the moment so be warned.
 
 ### Using flex
 ```javascript
@@ -43,7 +43,7 @@ flex.on('ready', function(){
     }
 }
 ```
-Match the columns to the database columns and make sure your priamry key is marked with "Primary:ture".
+Match the columns to the database columns and make sure your priamry key is marked with "Primary:true".
 
 ### Query data - Example query a user
 ```javascript
