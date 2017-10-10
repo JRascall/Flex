@@ -1,9 +1,11 @@
+'use strict'
 const Events = require('events');
 
 class Repository extends Events {
     constructor(conn, model) {
         super();
         const self = this;
+        self.Repository = true;
         self.Conn = conn;
         self.Model = model;
         self.Data = [];

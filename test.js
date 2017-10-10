@@ -8,6 +8,6 @@ var flex = new Flex({
 },  __dirname + "/models");
 
 flex.on('ready', function(){
-    var user = flex.Repositories.users.GetById(1);
+    var user = flex.users.GetById(1);
     console.log(user);
 });
