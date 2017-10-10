@@ -51,9 +51,9 @@ class Repository extends Events {
             if(i == self.Columns.length - 1) createQuery += "'" + model[self.Columns[i]] + "');"; 
             else createQuery += "'" + model[self.Columns[i]] + "',";    
         }
-        
-        self.Conn.query(createQuery, function(err, res, fields){
 
+        self.Conn.query(createQuery, function(err, res, fields){
+            if(err != null) self.Data.push(model);
         });
 
     }
