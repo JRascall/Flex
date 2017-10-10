@@ -13,16 +13,14 @@ class Flex extends Events {
         if(connection == null) throw "Provide database info";
         if(modelsPath == null) throw "Provide path to defined models";
 
-        global.Flex = self;
-
         self.Models = [];
         self.Repositories = [];
         self.ConnInfo = connection;
         self.Conn = MYSQL.createConnection(self.ConnInfo);
-
-        self.LoadModels(modelsPath);
-        self.Connect();
-
+        self.Connect(function(){
+            self.LoadModels(modelsPath);
+            self.emit("ready");
+        });
     }
 
     LoadModels(path) {
@@ -38,10 +36,8 @@ class Flex extends Events {
 
             for(var i = 0; i < self.Models.length; i++)
             {
-                self.Repositories.push(new Repository(self.Models[i].Name));   
+                self.Repositories[self.Models[i].Name] = new Repository(self.Conn, self.Models[i]);   
             }
-
-            console.log(self.Repositories);
         }
         else
         {
@@ -51,7 +47,7 @@ class Flex extends Events {
         return;
     }
 
-    Connect() {
+    Connect(cb) {
         const self = this;
         self.Conn.connect(function(err) {
             if(err) {
@@ -59,6 +55,7 @@ class Flex extends Events {
                 return;
             }
             console.log("CONNECTED TO DATABASE");
+            cb();
         });
     }
 

@@ -6,3 +6,10 @@ var flex = new Flex({
     password: "",
     database: "test"
 },  __dirname + "/models");
+
+flex.on('ready', function(){
+    setTimeout(function(){
+        var user = flex.Repositories.users.GetById(2);
+        console.log(user);
+    }, 2000);
+})

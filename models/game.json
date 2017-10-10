@@ -1,0 +1,17 @@
+{
+    "Name": "game",
+    "Columns": {
+        "Id" : {
+            "Type": "int",
+            "Primary": true,
+            "IsDBGenerated": "true"
+        },
+        "name" : {
+            "Type": "varchar",
+            "Length": "255"
+        },
+        "createdOn" : {
+            "Type": "timestamp"
+        }
+    }
+}
