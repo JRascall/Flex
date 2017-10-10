@@ -97,8 +97,4 @@ class Flex extends Events {
 
 }
 
-function test() {
-
-}
-
 module.exports = Flex;
