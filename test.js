@@ -13,9 +13,10 @@ flex.on('ready', function(){
     //flex.users.UpdateById(1, user);
     //flex.users.DeleteById(1);
 
-    var newUser = {
-        "email" : "jamiesEmaildowehavenulls",
-        "password" : "yes",
-    }
-    flex.users.Create(newUser);
+    var users = flex.users.Where(function(x){
+        if(x.email == "jamie.mascall@parkersoftware.com") return true;
+        else return false;
+    }); 
+
+    console.log(users);
 });

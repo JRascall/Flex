@@ -59,6 +59,7 @@ class Repository extends Events {
     }
 
     GetAll() {
+        const self = this;
         return self.Data;
     }
 
@@ -110,6 +111,20 @@ class Repository extends Events {
             });
             self.Data.splice(index, 1);
         }
+    }
+
+    Where(lamda) {
+        const self = this;
+        var data = [];
+        var all = self.GetAll();
+        
+        for(var i = 0; i < all.length; i++)
+        {
+            var result = lamda(all[i]);
+            if(result == true) data.push(all[i]);
+        }
+
+        return data;
     }
 }
 
