@@ -25,11 +25,11 @@ class Flex extends Events {
 
         self.Models = [];
         self.Repositories = [];
+        self.ReadyRepos = 0;
         self.ConnInfo = connection;
         self.Conn = MYSQL.createConnection(self.ConnInfo);
         self.Connect(function(){
             self.LoadModels(modelsPath);
-            self.emit("ready");
         });
     }
 
@@ -46,7 +46,9 @@ class Flex extends Events {
 
             for(var i = 0; i < self.Models.length; i++)
             {
-                self.Repositories[self.Models[i].Name] = new Repository(self.Conn, self.Models[i]);   
+                var repo = new Repository(self.Conn, self.Models[i]);   
+                repo.on('ready', () => { self.IsReady() });
+                self.Repositories[self.Models[i].Name] = repo;
             }
         }
         else
@@ -56,6 +58,13 @@ class Flex extends Events {
 
         return;
     }
+
+    IsReady(e, args) {
+        const self = this;
+        self.ReadyRepos++;
+        if(self.ReadyRepos == Object.keys(self.Repositories).length) self.emit("ready");
+    }
+
 
     Connect(cb) {
         const self = this;
@@ -74,6 +83,10 @@ class Flex extends Events {
         self.Conn.end();
     }
 
+
+}
+
+function test() {
 
 }
 

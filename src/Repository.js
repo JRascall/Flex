@@ -44,7 +44,7 @@ class Repository extends Events {
         return null;
     }
 
-    UpdateById(id) {
+    UpdateById(id, model) {
         const self = this;
         
         
