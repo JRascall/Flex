@@ -58,6 +58,10 @@ class Repository extends Events {
 
     }
 
+    GetAll() {
+        return self.Data;
+    }
+
     GetById(id) {
         const self = this;
         for(var i = 0; i < self.Data.length; i++)
