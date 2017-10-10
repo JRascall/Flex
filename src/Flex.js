@@ -13,6 +13,16 @@ class Flex extends Events {
         if(connection == null) throw "Provide database info";
         if(modelsPath == null) throw "Provide path to defined models";
 
+        String.prototype.format = function() {
+            var self = this;
+            var count = arguments.length;
+            for(var i = 0; i < count; i++)
+            {
+                self = self.replace('{' + i + '}', arguments[i]);   
+            }
+            return self;
+        }        
+
         self.Models = [];
         self.Repositories = [];
         self.ConnInfo = connection;

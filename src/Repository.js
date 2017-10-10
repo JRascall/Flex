@@ -10,7 +10,8 @@ class Repository extends Events {
         self.Columns = Object.keys(self.Model.Columns);
         self.PrimaryKey = ModelPrimaryKey(self.Model);
 
-        self.Conn.query("SELECT * FROM `" + model.Name + "`", function(err, res, fields){
+        var getAllQuery = "SELECT * FROM {0}".format(model.Name);
+        self.Conn.query(getAllQuery, function(err, res, fields){
             if(err) 
             {
                 console.log(err);
@@ -44,7 +45,9 @@ class Repository extends Events {
     }
 
     UpdateById(id) {
-
+        const self = this;
+        
+        
     }
 
     DeleteById(id) {
