@@ -4,6 +4,7 @@ const MYSQL = require('mysql');
 const FS = require('fs');
 
 const Repository = require('./Repository.js');
+const Database = require('./Database.js');
 
 class Flex extends Events {
     constructor(connection, modelsPath) {
@@ -25,9 +26,8 @@ class Flex extends Events {
 
         self.Models = [];
         self.ReadyRepos = 0;
-        self.ConnInfo = connection;
-        self.Conn = MYSQL.createConnection(self.ConnInfo);
-        self.Connect(function(){
+        self.DB = new Database(connection); 
+        self.DB.on('ready', function() {
             self.LoadModels(modelsPath);
         });
     }
@@ -45,7 +45,7 @@ class Flex extends Events {
 
             for(var i = 0; i < self.Models.length; i++)
             {
-                var repo = new Repository(self.Conn, self.Models[i]);   
+                var repo = new Repository(self.DB.Conn, self.Models[i]);   
                 repo.on('ready', () => { self.IsReady() });
                 self[self.Models[i].Name] = repo;
             }
@@ -75,26 +75,6 @@ class Flex extends Events {
 
         if(self.ReadyRepos == repos) self.emit("ready");
     }
-
-
-    Connect(cb) {
-        const self = this;
-        self.Conn.connect(function(err) {
-            if(err) {
-                console.error("ERROR CONNECTING TO DATABASE");
-                return;
-            }
-            console.log("CONNECTED TO DATABASE");
-            cb();
-        });
-    }
-
-    Disconnect() {
-        const self = this;
-        self.Conn.end();
-    }
-
-
 }
 
 module.exports = Flex;

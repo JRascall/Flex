@@ -67,7 +67,11 @@ class Repository extends Events {
         const self = this;
         for(var i = 0; i < self.Data.length; i++)
         {
-           if(self.Data[i][self.PrimaryKey] == id) return self.Data[i];   
+            if(self.Data[i][self.PrimaryKey] == id) 
+            {  
+            
+                return self.Data[i];   
+            }
         }
 
         return null;
