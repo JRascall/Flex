@@ -130,6 +130,19 @@ class Repository extends Events {
 
         return data;
     }
+
+    First(lamda) {
+        const self = this;
+        var all = self.GetAll();
+
+        for(var i = 0; i < all.length; i++)
+        {
+            var result = lamda(all[i]);
+            if(result == true) return all[i];   
+        }
+        
+        return null;
+    }
 }
 
 function ModelPrimaryKey(model) {
