@@ -36,13 +36,24 @@ flex.on('ready', function(){
 ```
 Match the columns to the database columns and make sure your priamry key is marked with "Primary:true".
 
+### Table Methods
+```javascript
+    Create(model);
+    GetById(id);
+    GetAll();
+    UpdateById(id, model);
+    DeleteById(id);
+    Where(lamda);
+    First(lamda);
+```
+
 ### Query data - Example query a user
 ```javascript
 var user = flex.users.GetById(1);
 ```
 the flex instance will contain the collections of your tables so if you had a model with the name "games" which models your "games" table it will be in flex.games so you can do flex.games.GetById(2) to get a record with the Id of 2.
 
-### WHERE Query data - Example query all by email
+### Where Query data - Example query all by email
 ```javascript
 var users = flex.users.Where(function(x){
     if(x.email == "jamie@hotmail.com") return true;
