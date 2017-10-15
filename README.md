@@ -26,20 +26,11 @@ flex.on('ready', function(){
     "Name": "users",
     "Columns": {
         "Id" : {
-            "Type": "int",
             "Primary": true
         },
-        "email" : {
-            "Type": "varchar",
-            "Length": "255"
-        },
-        "password" : {
-            "Type" : "varchar",
-            "Length": "255"
-        },
-        "createdOn" : {
-            "Type": "timestamp"
-        }
+        "email" : {},
+        "password" : {},
+        "createdOn" : {}
     }
 }
 ```

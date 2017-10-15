@@ -8,5 +8,4 @@ var flex = new Flex({
 },  __dirname + "/models");
 
 flex.on('ready', function(){
-    
 });
